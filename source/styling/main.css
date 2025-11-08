@@ -126,3 +126,56 @@ body {
 .anchors {
 	color: var(--onyx);
 }
+
+.modalTemplate,
+input[type='text'],
+textarea {
+	outline: none;
+	border: none;
+}
+.modalInput {
+	background-color: var(--padding-color);
+	color: var(--brunswick-green);
+	padding: 0.5rem;
+	border-radius: 1rem;
+	resize: none;
+}
+.modalTemplate {
+	border-radius: 1rem 2rem;
+}
+
+.modalContainer {
+	width: 250px;
+	padding: 1rem;
+}
+
+.modalTitle {
+	font-weight: bold;
+	font-size: 2rem;
+	text-align: center;
+}
+
+.modalHeader {
+	margin-bottom: 0.8rem;
+}
+
+.modalForms,
+.modalContainer {
+	display: flex;
+	flex-flow: column;
+	gap: 0.5rem;
+}
+
+/* Responsivity */
+
+@media (max-width: 440px) {
+	.buttonContainer {
+		max-width: 300px;
+		margin: 0;
+		flex-flow: column wrap;
+	}
+	.buttonContainer > .appButton,
+	.todoHolder {
+		width: 300px;
+	}
+}
