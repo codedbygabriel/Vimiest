@@ -51,7 +51,7 @@ function addToDoModal() {
 				<textarea class='modalInput' placeholder='Create a dotfiles repository, learn the basics on vimtutor...' name="todo-description" rows="8" cols="10"></textarea>
 
 				<div>
-					<button class="appButton" type="submit">Add Task</button>
+					<button class="appButton addTodoButton" type="button">Add Task</button>
 					<button class="appButton closeButton" type="button">Close</button>
 				</div>
 			</form>
@@ -64,7 +64,7 @@ function addToDoModal() {
 	styleInput();
 
 	document.querySelector('.closeButton').addEventListener('click', event => modal.close());
-	document.querySelector('.addForm').addEventListener('submit', event => {
+	document.querySelector('.addTodoButton').addEventListener('click', event => {
 		event.preventDefault();
 		const todoName = document.getElementsByName('todo-name')[0];
 		const todoDescription = document.getElementsByName('todo-description')[0];
