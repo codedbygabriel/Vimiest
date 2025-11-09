@@ -63,6 +63,7 @@ function addToDoModal() {
 
 	styleInput();
 
+	document.querySelector('.closeButton').addEventListener('click', event => modal.close());
 	document.querySelector('.addForm').addEventListener('submit', event => {
 		event.preventDefault();
 		const todoName = document.getElementsByName('todo-name')[0];
