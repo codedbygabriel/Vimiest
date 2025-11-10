@@ -122,12 +122,13 @@ body {
 .mod {
 	color: var(--red);
 }
-.appDescription > .code {
+.code {
 	font-weight: 500;
 	color: var(--padding-color);
 	background-color: var(--onyx);
 	font-size: 1rem;
 	padding: 0.1rem;
+	font-style: italic;
 }
 /* Footer */
 
