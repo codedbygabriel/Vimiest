@@ -78,7 +78,9 @@ function removeHandler(event) {
 			const database = initData();
 			const element = elements[Number(event.key)].children[0];
 
-			const newDatabase = database.filter(data => !element.innerText.includes(data.name));
+			element.children[0].remove();
+			const newDatabase = database.filter(data => !(element.innerText == data.name));
+
 			localStorage.setItem('_vimiest_todos', JSON.stringify(newDatabase));
 			renderTodos();
 		}
@@ -106,6 +108,7 @@ function addTodoToList(name, description, modal) {
 	localStorage.setItem('_vimiest_todos', JSON.stringify(database));
 
 	renderTodos();
+	name.value = '';
 	modal.close();
 }
 
@@ -155,6 +158,13 @@ function renderTodos() {
 }
 
 function viewTodo(name, description) {
+	const exist = document.querySelector(`.${name}`);
+
+	if (exist) {
+		exist.showModal();
+		return;
+	}
+
 	const modal = document.createElement('dialog');
 	const body = document.querySelector('body');
 
@@ -166,6 +176,7 @@ function viewTodo(name, description) {
 	paragraph.textContent = description === 'false' ? 'No Description Provided' : description;
 
 	modal.classList.add('modalTemplate');
+	modal.classList.add(name);
 	container.classList.add('modalContainer');
 	header.classList.add('modalHeader');
 	headerContent.classList.add('modalTitle');
@@ -182,6 +193,12 @@ function viewTodo(name, description) {
 }
 
 function viewCheatSheet() {
+	const exist = document.querySelector('.cheatSheet');
+	if (exist) {
+		exist.showModal();
+		return;
+	}
+
 	const modal = document.createElement('dialog');
 	const body = document.querySelector('body');
 
@@ -199,6 +216,7 @@ function viewCheatSheet() {
 		`;
 
 	modal.classList.add('modalTemplate');
+	modal.classList.add('cheatSheet');
 	container.classList.add('modalContainer');
 	header.classList.add('modalHeader');
 	headerContent.classList.add('modalTitle');
