@@ -29,47 +29,22 @@ function configureButtons() {
 	document.querySelector('.appButton.addButton').addEventListener('click', addToDoModal);
 	document.querySelector('.appButton.removeButton').addEventListener('click', removeTodo);
 	document.querySelector('.appButton.clearButton').addEventListener('click', event => clearTodos(true));
-}
 
-function addToDoModal() {
-	const modal = document.createElement('dialog');
-	modal.classList.add('modalTemplate');
-	modal.classList.add('addModal');
-
-	const body = document.querySelector('body');
-
-	modal.innerHTML = `
-		<div class='modalContainer'>
-			<header class="modalHeader">
-				<h2 class="modalTitle">Add To Do!</h2>
-			</header>
-			<form class="modalForms addForm">
-				<label class='inputLabels' for="todo-name">I'll accomplish / do...</label>
-				<input class='modalInput modalInputTask' placeholder='Learn vim motions' type="text" name="todo-name" />
-
-				<label class='inputLabels' for="todo-description">Description</label>
-				<textarea class='modalInput' placeholder='Create a dotfiles repository, learn the basics on vimtutor...' name="todo-description" rows="8" cols="10"></textarea>
-
-				<div>
-					<button class="appButton addTodoButton" type="button">Add Task</button>
-					<button class="appButton closeButton" type="button">Close</button>
-				</div>
-			</form>
-		</div>
-		`;
-
-	body.appendChild(modal);
-	modal.showModal();
-
-	styleInput();
-
+	const modal = document.querySelector('.modalTemplate');
 	document.querySelector('.closeButton').addEventListener('click', event => modal.close());
-	document.querySelector('.addTodoButton').addEventListener('click', event => {
+	document.querySelector('.addForm').addEventListener('submit', event => {
 		event.preventDefault();
 		const todoName = document.getElementsByName('todo-name')[0];
 		const todoDescription = document.getElementsByName('todo-description')[0];
 		addTodoToList(todoName, todoDescription, modal);
 	});
+}
+
+function addToDoModal() {
+	const modal = document.querySelector('.modalTemplate');
+
+	modal.showModal();
+	styleInput();
 }
 
 function removeTodo() {
@@ -164,7 +139,6 @@ function renderTodos() {
 	const container = document.querySelector('.appContent');
 	const todos = initData();
 
-	// if (todos.length === 0) return false;
 	if (elements.length >= 1) clearTodos();
 
 	todos.forEach(todo => {
@@ -173,11 +147,38 @@ function renderTodos() {
 			`
 			<section class="todoHolder">
 				<h2 class="taskTitle">${todo.name}</h2>
-				<button class="appButton toDoButton" type="button">Edit</button>
+				<button onclick='viewTodo("${todo.name}", "${todo.description}")' class="appButton toDoButton" type="button">View</button>
 			</section>
 		`
 		);
 	});
+}
+
+function viewTodo(name, description) {
+	const modal = document.createElement('dialog');
+	const body = document.querySelector('body');
+
+	const container = document.createElement('div');
+	const header = document.createElement('header');
+	const headerContent = document.createElement('h2');
+
+	const paragraph = document.createElement('p');
+	paragraph.textContent = description === 'false' ? 'No Description Provided' : description;
+
+	modal.classList.add('modalTemplate');
+	container.classList.add('modalContainer');
+	header.classList.add('modalHeader');
+	headerContent.classList.add('modalTitle');
+	headerContent.textContent = name;
+
+	header.appendChild(headerContent);
+
+	container.appendChild(header);
+	container.appendChild(paragraph);
+
+	modal.appendChild(container);
+	body.appendChild(modal);
+	modal.showModal();
 }
 
 function styleInput() {
