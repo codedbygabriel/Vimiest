@@ -130,6 +130,9 @@ body {
 	padding: 0.1rem;
 	font-style: italic;
 }
+.keybindParagraph {
+	margin-bottom: 1rem;
+}
 /* Footer */
 
 .anchors {
