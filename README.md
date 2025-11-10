@@ -6,6 +6,8 @@ A Web To do App that uses vim motions for some reason.
 
 All data is stored in `LocalStorage` in the `_vimiest_todos` Key. As Long as the LocalStorage is not cleaned, your data will be safe.
 
+[Open App](https://codedbygabriel.github.io/Vimiest/)
+
 ## Keybinds
 
 | Keys | Action |
