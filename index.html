@@ -23,5 +23,24 @@
 			</header>
 			<main class="appContent"></main>
 		</div>
+		<dialog class="modalTemplate addModal">
+			<div class="modalContainer">
+				<header class="modalHeader">
+					<h2 class="modalTitle">Add To Do!</h2>
+				</header>
+				<form class="modalForms addForm">
+					<label class="inputLabels" for="todo-name">I'll accomplish / do...</label>
+					<input class="modalInput modalInputTask" placeholder="Learn vim motions" type="text" name="todo-name" />
+
+					<label class="inputLabels" for="todo-description">Description</label>
+					<textarea class="modalInput" placeholder="Create a dotfiles repository, learn the basics on vimtutor..." name="todo-description" rows="8" cols="10"></textarea>
+
+					<div>
+						<button class="appButton addTodoButton" type="submit">Add Task</button>
+						<button class="appButton closeButton" type="button">Close</button>
+					</div>
+				</form>
+			</div>
+		</dialog>
 	</body>
 </html>
