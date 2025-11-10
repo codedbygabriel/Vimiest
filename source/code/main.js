@@ -191,10 +191,10 @@ function viewCheatSheet() {
 
 	const contentContainer = document.createElement('div');
 	contentContainer.innerHTML = `
-			<p><code class='code'>&lt;f&gt;</code>-a 	Opens Add Menu</p>
-			<p><code class='code'>&lt;f&gt;</code>-r 	Enables Remove Mode</p>
-			<p><code class='code'>&lt;f&gt;</code>-c 	Clear All To Dos</p>
-			<p><code class='code'>&lt;f&gt;</code>-h 	Open CheatSheet </p>
+			<p><code class='code'>&lt;f&gt;-a</code> 	Opens Add Menu</p>
+			<p><code class='code'>&lt;f&gt;-r</code> 	Enables Remove Mode</p>
+			<p><code class='code'>&lt;f&gt;-c</code> 	Clear All To Dos</p>
+			<p><code class='code'>&lt;f&gt;-h</code> 	Open CheatSheet </p>
 			<p><code class='code'>&lt;f&gt;</code> 	Outline Buttons a-r-c</p>
 		`;
 
