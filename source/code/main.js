@@ -40,7 +40,20 @@ function configureButtons() {
 	});
 }
 
+function verifyModals() {
+	let isOpen = false;
+	const dialogs = document.querySelectorAll('dialog');
+
+	dialogs.forEach(dialog => {
+		if (dialog.open) isOpen = true;
+	});
+
+	return isOpen;
+}
+
 function addToDoModal() {
+	if (verifyModals()) return;
+
 	const modal = document.querySelector('.modalTemplate');
 
 	modal.showModal();
@@ -48,6 +61,7 @@ function addToDoModal() {
 }
 
 function removeTodo() {
+	if (verifyModals()) return;
 	const button = document.querySelector('.appButton.removeButton');
 	const elements = document.querySelectorAll('.todoHolder');
 
@@ -56,7 +70,7 @@ function removeTodo() {
 	if (!button.classList.contains('elementsModified')) {
 		let counter = 0;
 		elements.forEach(element => {
-			element.children[0].insertAdjacentHTML('afterbegin', `<span class='mod' onclick='test()'>[${counter}]</span> `);
+			element.children[0].insertAdjacentHTML('afterbegin', `<span class='mod'>[${counter}]</span> `);
 			counter++;
 		});
 
@@ -89,16 +103,33 @@ function removeHandler(event) {
 	}
 }
 
+function verifyDuplicates(database, name) {
+	let isDuplicate = false;
+
+	database.forEach(data => {
+		if (data.name === name.value) isDuplicate = true;
+	});
+
+	return isDuplicate;
+}
+
 function addTodoToList(name, description, modal) {
 	if (!(name.value.length >= 5)) {
 		name.placeholder = 'Your To Do needs to contain at least 5 chars!';
 		name.value = '';
 		name.style.color = '#846a6aff';
 		name.focus();
-		return false;
+		return;
 	}
 
 	const database = initData();
+	if (verifyDuplicates(database, name)) {
+		alert('To do already added.');
+		name.value = '';
+		name.style.color = '#846a6aff';
+		name.focus();
+		return;
+	}
 
 	database.push({
 		name: name.value,
@@ -144,21 +175,23 @@ function renderTodos() {
 
 	if (elements.length >= 1) clearTodos();
 
+	let counter = 0;
 	todos.forEach(todo => {
 		container.insertAdjacentHTML(
 			'beforeend',
 			`
 			<section class="todoHolder">
 				<h2 class="taskTitle">${todo.name}</h2>
-				<button onclick='viewTodo("${todo.name}", "${todo.description}")' class="appButton toDoButton" type="button">View</button>
+				<button onclick='viewTodo("${counter}", "${todo.name}", "${todo.description}")' class="appButton toDoButton" type="button">View</button>
 			</section>
 		`
 		);
+		counter++;
 	});
 }
 
-function viewTodo(name, description) {
-	const exist = document.querySelector(`.${name}`);
+function viewTodo(id, name, description) {
+	const exist = document.getElementById(`${id}`);
 
 	if (exist) {
 		exist.showModal();
@@ -175,8 +208,8 @@ function viewTodo(name, description) {
 	const paragraph = document.createElement('p');
 	paragraph.textContent = description === 'false' ? 'No Description Provided' : description;
 
+	modal.id = id;
 	modal.classList.add('modalTemplate');
-	modal.classList.add(name);
 	container.classList.add('modalContainer');
 	header.classList.add('modalHeader');
 	headerContent.classList.add('modalTitle');
@@ -193,6 +226,7 @@ function viewTodo(name, description) {
 }
 
 function viewCheatSheet() {
+	if (verifyModals()) return;
 	const exist = document.querySelector('.cheatSheet');
 	if (exist) {
 		exist.showModal();
