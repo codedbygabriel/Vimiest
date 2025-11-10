@@ -15,5 +15,5 @@ All data is stored in `LocalStorage` in the `_vimiest_todos` Key. As Long as the
 | `<f>-a` | Opens Add Menu |
 | `<f>-r` | Enables Remove Mode |
 | `<f>-c` | Clears All To Dos |
-| `<f>-h` | Opens CheatSheet (WIP) |
+| `<f>-h` | Opens CheatSheet |
 | `<f>` | Outlines Buttons -a-r-c |

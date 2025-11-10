@@ -14,7 +14,7 @@ function initiateVimMotions() {
 		if (pressedKeys.has('f') && pressedKeys.has('a')) addToDoModal();
 		if (pressedKeys.has('f') && pressedKeys.has('r')) removeTodo();
 		if (pressedKeys.has('f') && pressedKeys.has('c')) clearTodos(true);
-		if (pressedKeys.has('f') && pressedKeys.has('h')) console.info('hm');
+		if (pressedKeys.has('f') && pressedKeys.has('h')) viewCheatSheet();
 	});
 
 	document.addEventListener('keyup', event => {
@@ -175,6 +175,39 @@ function viewTodo(name, description) {
 
 	container.appendChild(header);
 	container.appendChild(paragraph);
+
+	modal.appendChild(container);
+	body.appendChild(modal);
+	modal.showModal();
+}
+
+function viewCheatSheet() {
+	const modal = document.createElement('dialog');
+	const body = document.querySelector('body');
+
+	const container = document.createElement('div');
+	const header = document.createElement('header');
+	const headerContent = document.createElement('h2');
+
+	const contentContainer = document.createElement('div');
+	contentContainer.innerHTML = `
+			<p><code class='code'>&lt;f&gt;</code>-a 	Opens Add Menu</p>
+			<p><code class='code'>&lt;f&gt;</code>-r 	Enables Remove Mode</p>
+			<p><code class='code'>&lt;f&gt;</code>-c 	Clear All To Dos</p>
+			<p><code class='code'>&lt;f&gt;</code>-h 	Open CheatSheet </p>
+			<p><code class='code'>&lt;f&gt;</code> 	Outline Buttons a-r-c</p>
+		`;
+
+	modal.classList.add('modalTemplate');
+	container.classList.add('modalContainer');
+	header.classList.add('modalHeader');
+	headerContent.classList.add('modalTitle');
+	headerContent.textContent = 'Vimiest CheatSheet';
+
+	header.appendChild(headerContent);
+
+	container.appendChild(header);
+	container.appendChild(contentContainer);
 
 	modal.appendChild(container);
 	body.appendChild(modal);
